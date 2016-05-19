@@ -1,4 +1,4 @@
-package org.sensoranalytics;
+package com.savi.timezones;
 
 import com.vividsolutions.jts.geom.*;
 import com.vividsolutions.jts.index.strtree.STRtree;

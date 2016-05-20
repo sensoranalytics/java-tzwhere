@@ -4,7 +4,7 @@
 // - Should part reflect ~project name "Java-TZWhere"?
 // - Should there be part under "timezones" that is specific to these
 //   classes (roughly like ...timezones.geolookup or ...timezones.javatzwhere)?
-package com.savi.timezones;
+package com.savi.geo.timezones;
 
 
 //??: TODO: Probably RENAME class (to follow normal naming practice of being based
@@ -34,7 +34,7 @@ public class TzWhere {
      * @return  the ID of the specified point's containing time zone, if any
      *   found; otherwise null
      */
-    public static String getLatLogTimeZoneId(double latitude, double longitude) {
+    public static String getLatLongTimeZoneId(double latitude, double longitude) {
         return geolocToTzIndex.getLatLongTimeZoneId(latitude, longitude);
     }
 

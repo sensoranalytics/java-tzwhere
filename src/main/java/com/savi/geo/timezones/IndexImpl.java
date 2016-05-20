@@ -1,4 +1,4 @@
-package com.savi.timezones;
+package com.savi.geo.timezones;
 
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Envelope;
@@ -185,54 +185,6 @@ class IndexImpl {
         return result;
     }
 
-
-    private static void testTwo(STRtree index) {
-        // A point in tile(?) for two xxxx in index (as of 2016-05-19).
-        Coordinate query = new Coordinate(-86.764727, 37.952126);
-        System.err.println("testTwo: query = " + query);
-        @SuppressWarnings("unchecked")
-        List<FeatureAndId> indexMatches = index.query(new Envelope(query));
-        System.err.println("testTwo: indexMatches.size() = " + indexMatches.size());
-        assert  2 == indexMatches.size() : indexMatches.size();
-
-        GeometryFactory gf = new GeometryFactory();
-
-        Point point = gf.createPoint(query);
-        System.err.println("testTwo: point = " + point);
-        for (FeatureAndId featRENAME: indexMatches) {
-            //System.err.println("testTwo: featRENAME = " + featRENAME);
-            String zoneId = featRENAME.getZoneId();
-            System.err.println("testTwo: zoneId = " + zoneId);
-            SimpleFeature feature = featRENAME.getFeature();
-            Geometry geom = (Geometry) feature.getDefaultGeometry();
-            //System.err.println("testTwo: geom = " + geom);
-            if (geom.contains(point)) {
-                System.out.println("testTwo: point is contained in " + zoneId);
-            }
-        }
-    }
-
-
-
-
-    private static void testOne(STRtree indexxx) {
-        final Coordinate c = new Coordinate(-77.0920, 38.8044);
-        System.err.println("c =" + c);
-        @SuppressWarnings("unchecked")
-        List<FeatureAndId> indexMatchesxx = indexxx.query(new Envelope(c));
-        System.err.println("indexMatches.size() = " + indexMatchesxx.size());
-
-        for (FeatureAndId featRENAMExx : indexMatchesxx) {
-            //System.err.println("featRENAMExx =" + featRENAMExx);
-            System.out.println("testOne: " + featRENAMExx.getZoneId());
-        }
-    }
-
-    public static void main(String... args) throws IOException {
-        STRtree indexxx = IndexImpl.buildIndexFromDefaultResource();
-        testOne(indexxx);
-        testTwo(indexxx);
-    }
 }
 
 

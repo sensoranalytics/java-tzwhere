@@ -29,18 +29,17 @@ class IndexImpl {
     private final STRtree pointToTzApproxIndex;
 
 
-    //???? TODO: Probably either change from Feature to Geometry or change to get zone ID out of feature.
-    private static class FeatureAndId {
-        private final SimpleFeature zoneGeofeature;
+    private static class GeometryAndId {
+        private final Geometry zoneGeometry;
         private final String zoneId;
 
-        FeatureAndId(SimpleFeature zoneGeofeature, String zoneId) {
-            this.zoneGeofeature = zoneGeofeature;
+        GeometryAndId(Geometry zoneGeometry, String zoneId) {
+            this.zoneGeometry = zoneGeometry;
             this.zoneId = zoneId;
         }
 
-        SimpleFeature getFeature() {
-            return zoneGeofeature;
+        Geometry getGeometry() {
+            return zoneGeometry;
         }
 
         String getZoneId() {
@@ -99,10 +98,10 @@ class IndexImpl {
                     }
 
                     // Index from (rectangular) envelope of geometry (not exact
-                    // geometry); to feature with exact geometry for final
-                    // resolution and zone IDfor final answer.
+                    // geometry); to exact geometry for final resolution and
+                    // zone ID for final answer.
                     geolocToTzIndex.insert(tzpFeatGeometry.getEnvelopeInternal(),
-                                           new FeatureAndId(tzpFeature, timeZoneId));
+                                           new GeometryAndId(tzpFeatGeometry, timeZoneId));
                 }
             }
 
@@ -155,20 +154,19 @@ class IndexImpl {
     String getLatLongTimeZoneId(double latitude, double longitude) {
         String result = null;
 
-        Coordinate queryPoint = new Coordinate(longitude, latitude);
+        final Coordinate queryPoint = new Coordinate(longitude, latitude);
 
         @SuppressWarnings("unchecked") // because we put only FeatureAndId in there
-        final List<FeatureAndId> approxMatches =
+        final List<GeometryAndId> approxMatches =
                 pointToTzApproxIndex.query(new Envelope(queryPoint));
 
         Point point = geometryFactory.createPoint(queryPoint);
-        for (FeatureAndId tzpFeatureAndId: approxMatches) {
-            SimpleFeature feature = tzpFeatureAndId.getFeature();
-            Geometry geom = (Geometry) feature.getDefaultGeometry();
+        for (final GeometryAndId tzpGeometryAndId: approxMatches) {
+            final Geometry geom = tzpGeometryAndId.getGeometry();
 
             if (geom.covers(point)) {
                 if (null == result) {
-                    result = tzpFeatureAndId.getZoneId();
+                    result = tzpGeometryAndId.getZoneId();
                 }
                 else {
                     // Another geometry matched too, which should mean that the

@@ -27,24 +27,29 @@ public class TzWhereTest {
         final double longitude = -86.764727;
         final String actual = TzWhere.getLatLongTimeZoneId(latitude, longitude);
         final String expected = "America/Indiana/Tell_City";
-    }
-
-    @Test
-    public void testPointAtBoundaryVertex() {
-        // A point that is vertex on boundary polygon of Europe/Vatican:
-        // (Attempted exact values--but unconfirmed.)
-        final double latitude  = 41.9063606262207;
-        final double longitude = 12.45091629028328;
-        final String actual = TzWhere.getLatLongTimeZoneId(latitude, longitude);
-        final String expected = "Europe/Vatican";
 
         assertThat(actual, equalTo(expected));
     }
+
+
+    @Test
+    public void testPointAtBoundaryVertex() {
+        // A point that is vertex on boundary polygon between Europe/Vatican
+        // and Europe/Rome:
+        // (To confirm value is exactly on boundary, confirm that IndexImpl's
+        // getLatLongTimeZoneId gets two candidates that cover the point.)
+        final double latitude  = 41.908_138_275_146_484;
+        final double longitude = 12.450_916_290_283_203;
+        final String actual = TzWhere.getLatLongTimeZoneId(latitude, longitude);
+
+        assertThat(actual, anyOf(equalTo("Europe/Vatican"),  equalTo("Europe/Rome")));
+    }
+
     @Test
     public void testPointNearBoundaryVertex1() {
         // A point that is just inside vertex on boundary polygon of Europe/Vatican:
-        final double latitude  = 41.9063606262207 - 0.002; // on northern part
-        final double longitude = 12.45091629028328;
+        final double latitude  = 41.908_138_275_146_484 - 0.002; // on northern part
+        final double longitude = 12.450_916_290_283_203;
         final String actual = TzWhere.getLatLongTimeZoneId(latitude, longitude);
         final String expected = "Europe/Vatican";
 
@@ -54,13 +59,14 @@ public class TzWhereTest {
     @Test
     public void testPointNearBoundaryVertex2() {
         // A point that is just outside vertex on boundary polygon of Europe/Vatican:
-        final double latitude  = 41.9063606262207 + 0.002; // on northern part
-        final double longitude = 12.45091629028328;
+        final double latitude  = 41.908_138_275_146_484 + 0.002; // on northern part
+        final double longitude = 12.450_916_290_283_203;
         final String actual = TzWhere.getLatLongTimeZoneId(latitude, longitude);
         final String expected = "Europe/Rome";
 
         assertThat(actual, equalTo(expected));
     }
+
 
     @Test
     public void testMidoceanTimeZonesNotSupportedYet() {

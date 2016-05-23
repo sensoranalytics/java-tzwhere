@@ -166,17 +166,15 @@ class IndexImpl {
             SimpleFeature feature = tzpFeatureAndId.getFeature();
             Geometry geom = (Geometry) feature.getDefaultGeometry();
 
-            if (geom.contains(point)) {
+            if (geom.covers(point)) {
                 if (null == result) {
                     result = tzpFeatureAndId.getZoneId();
                 }
                 else {
-                    //??? TODO: Resolve: Can two timezone geometries both think
-                    // they contain the same point?  What if the point is a vertex
-                    // on the boundary between two zones (and both zones use some
-                    // exact same points)?
-                    // If so:  Return first seen? last seen? any one? Report condition?
-                    // If not:  Throw exception for unexpected case?  Log warning?  Ignore?
+                    // Another geometry matched too, which should mean that the
+                    // point was on the common boundary between the two, so ...
+                    // (arbitrarily) pick this one.
+                    result = tzpGeometryAndId.getZoneId();
                 }
             }
         }

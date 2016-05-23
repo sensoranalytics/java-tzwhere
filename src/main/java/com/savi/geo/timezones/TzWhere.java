@@ -39,7 +39,7 @@ package com.savi.geo.timezones;
  */
 public class TzWhere {
 
-    /** (To prevents instantiation.) */
+    /** (To prevent instantiation.) */
     private TzWhere() {
     }
 

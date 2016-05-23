@@ -1,30 +1,50 @@
-//?? TODO:  REVIEW:  What should package name be?
-// - Should it be com.savi.SOMETHING.timezones?  (E.g., "os" for open source, or
-//   something re "utilities")
-// - Should part reflect ~project name "Java-TZWhere"?
-// - Should there be part under "timezones" that is specific to these
-//   classes (roughly like ...timezones.geolookup or ...timezones.javatzwhere)?
+//?? TODO:  REVIEW:  How much flexibility should we support right now?
+// - Mainly, do/will we need to provide the option to, instead of using just the
+//   default shapefile (classpath resource files in the Jar file), use another
+//   shapefile(s) at the same time (in the same run and without classloader
+//   trickiness)?  (Relates to how to structure code now (re interface for
+//   internal IndexImpl, re static vs. non-static methods).)
+//
+// - Should we currently provide the option to override the default shapefile
+//   with one static replacement (probably by defining system property used to
+//   override default classpath resource pathname to shapefile files)?
+
+//?? TODO:  REVIEW:  Should proper-noun--based class name "TzWhere" be changed
+// to more-typical class name (common-noun--based noun phrase; trying to describe
+// class, perhaps "LocToTimeZoneMapper"?
+//
+// Some candidates:
+// - GeolocToTimeZoneMapper?
+// - LocToTimeZoneMapper?
+// - PointToTimeZoneMapper?
+// - TimeZoneMapper? (con: more risk of sounding like "mapper" in sense of showing TZ region on map)
+// - TimeZoneIndex?
+// - <prefix>TimeZoneIndex?
+// - something else?
+
+//?? TODO:  REVIEW:  (After resolving class name:)
+// If class is changed from TzWhere:  Should package name include "tzwhere"?
+// If so, should it be com.savi.geo.timezones.tzwhere or com.savi.geo.tzwhere?
+
 package com.savi.geo.timezones;
 
 
-//??: TODO: Probably RENAME class (to follow normal naming practice of being based
-// on (non-proper) noun; related to mapping geo to TZ, or looking up, getting TZ.
-// - TimeZoneMapper?
-// - GeolocToTimeZoneMapper?
-// - LatLongToTimeZoneMapper?
-// - PointToTimeZoneMapper?
-// - <prefix>TimeZoneIndex?
-// - other?
-// )
 /**
- * ??? TODO: Doc. a bit:
- * - shapefiles from http://....
- * - classpath resource pathname xxx ...
- * - [if impl.] property to override resource pathame
+ * Utility to map geographic locations to containing time zones.
+ *
+ * <p>
+ *   Uses time zone geographic area data (copied) from
+ *   http://efele.net/maps/tz/world/.
+ * </p>
  */
 public class TzWhere {
 
+    /** (To prevents instantiation.) */
+    private TzWhere() {
+    }
+
     private static IndexImpl geolocToTzIndex = new IndexImpl();
+
 
     /**
      * Gets ID of time zone at location specified by given latitude and longitude.

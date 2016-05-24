@@ -17,3 +17,8 @@ shapefile handling and [JTS](http://www.vividsolutions.com/jts/JTSHome.htm) for 
 ## Caveats
 ### Timezones at Sea
 The tz_world data is limited to only timezones on land. We'd like to add territorial waters, but we need shapes first.
+
+## TODOs
+* Improved documentation and examples
+* Added test coverage and configuration for automated CI
+* Publication to Maven Central

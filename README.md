@@ -3,8 +3,8 @@ A better Java library for determining Olson TZ Database time zones from latitude
 
 ## Rationale
 Existing Java implementations of timezone lookup (that we could find) were either inefficient
-(i.e. not indexed) or not packaged for reproducable builds, updates, and consumption. The
-goal of this project is to provide and efficient Java timezone lookup using standard
+(i.e., not indexed) or not packaged for reproducable builds, updates, and consumption. The
+goal of this project is to provide an efficient Java timezone lookup using standard
 Java tools and techniques.
 
 ## Technique

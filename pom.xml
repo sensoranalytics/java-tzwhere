@@ -4,17 +4,25 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.savi</groupId>
-    <artifactId>shapeconvert</artifactId>
+    <groupId>com.savi.geo</groupId>
+    <artifactId>Java-TzWhere</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
+		    <compilerArgument>-Xlint:all</compilerArgument>
+		    <showWarnings>true</showWarnings>
+		    <showDeprecation>true</showDeprecation>
                 </configuration>
             </plugin>
         </plugins>
@@ -57,5 +65,13 @@
             <artifactId>commons-math3</artifactId>
             <version>3.4.1</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 </project>

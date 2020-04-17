@@ -94,7 +94,7 @@
             </snapshots>
             <id>opengeo</id>
             <name>OpenGeo Maven Repository</name>
-            <url>http://repo.opengeo.org</url>
+            <url>https://repo.boundlessgeo.com/</url>
         </repository>
     </repositories>
 

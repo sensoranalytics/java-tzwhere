@@ -92,11 +92,12 @@
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
             <id>opengeo</id>
             <name>OpenGeo Maven Repository</name>
             <url>https://repo.osgeo.org/repository/release/</url>
-            <snapshots><enabled>false</enabled></snapshots>
-            <releases><enabled>true</enabled></releases>
         </repository>
     </repositories>
     <dependencies>

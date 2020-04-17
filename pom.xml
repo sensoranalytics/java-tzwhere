@@ -96,8 +96,23 @@
             <name>OpenGeo Maven Repository</name>
             <url>https://repo.boundlessgeo.com/</url>
         </repository>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
     </repositories>
-
+    <pluginRepositories>
+        <pluginRepository>
+            <id>central</id>
+            <url>https://repo.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
     <dependencies>
         <dependency>
 	    <!-- For org.geotools... -->
